@@ -1,14 +1,21 @@
 #include <iostream>
 #include <memory>
 
+class Lock {
+	public:
+	Lock() = default;
+	Lock(Lock& other) = delete;
+	Lock& operator=(Lock& other) = delete;
+	bool isLocked() const {
+		return false;
+	}
+};
+
 int main() {
-    int n;
-    std::cin >> n;
-    auto arr = std::make_unique<int[]>(n);
-    int sum = 0;
-    for (int i = 0; i < n; ++i) {
-       std::cin >> arr[i];
-        sum += arr[i];
-    }
-    std::cout << sum;
+	std::unique_ptr<Lock> lock = std::make_unique<Lock>();
+	if (lock->isLocked()) {
+		std::cout << "locked";
+	} else {
+		std::cout << "unlocked";
+	}
 }
