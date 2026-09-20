@@ -1,16 +1,15 @@
 #include <iostream>
 
-void swap(int* a, int* b) {
-    // dereference a and b to swap their values
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
-}
-
 int main() {
-    int x, y;
-    std::cin >> x >> y;
-    swap(&x, &y);
-    std::cout << x << " " << y << "\n";
+    int n;
+    std::cin >> n;
+    int* arr = new int[n];
+    int sum = 0;
+    for (int i = 0; i < n; ++i) {
+        std::cin >> arr[i];
+        sum += arr[i];
+    }
+    std::cout << sum;
+    delete[] arr;
     return 0;
 }
