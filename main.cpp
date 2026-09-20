@@ -1,21 +1,18 @@
 #include <iostream>
-#include <memory>
+#include <string>
+#include <utility>
 
-class Lock {
-	public:
-	Lock() = default;
-	Lock(Lock& other) = delete;
-	Lock& operator=(Lock& other) = delete;
-	bool isLocked() const {
-		return false;
-	}
-};
+std::string concat(std::string a, std::string b) {
+	// TODO: build the joined string here.
+	// a and b are your own copies -- move out of them instead of copying.
+	std::string result = std::move(a) + std::move(b);
+	return result;
+}
 
 int main() {
-	std::unique_ptr<Lock> lock = std::make_unique<Lock>();
-	if (lock->isLocked()) {
-		std::cout << "locked";
-	} else {
-		std::cout << "unlocked";
-	}
+	std::string a, b;
+	std::getline(std::cin, a);
+	std::getline(std::cin, b);
+	std::cout << concat(std::move(a), std::move(b)) << "\n";
+	return 0;
 }
